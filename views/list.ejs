@@ -1,0 +1,37 @@
+<%- include("header") -%>
+
+<!-- Header -->
+<div class="box" id="heading">
+    <h1>
+        <%= day %>
+    </h1>
+</div>
+
+<!-- Items -->
+<div class="box">
+    <% for(let i=0; i < values.length; i++){%>
+        <div class="item">
+            <p style="margin-right:auto;"><%= values[i] %>
+                <form method="post" action="/remove" style="display:inline;"><input type="text" value="<%=i%>" style="display:none" name="iteration"><button class="inline-button" type="submit">X</button></form>
+                <% if(i !=0) {%>
+                    <form method="post" action="/up" style="display:inline;"><input type="text" value="<%=i%>" style="display:none" name="iteration"><button class="inline-button" type="submit">⬆️</button></form>
+                    <%}
+                %>
+                <% if(i != values.length - 1) //Couldn't get moving an element down to work but this way we just move the later element up lol 
+                    {%>
+                    <form method="post" action="/up" style="display:inline;"><input type="text"value="<%=i+1%>" style="display:none" name="iteration"><button class="inline-button" type="submit">⬇️</button></form>
+                    <%}
+                %>
+            </p>
+        </div>
+        <%}%>
+    </div>
+</div>
+<div class="box">
+    <form class="item" method="post" action="/add">
+        <input type="text" name="todo" id="textField" placeholder="New Item" autocomplete="off">
+        <button type="submit" name="button">+</button>
+    </form>
+</div>
+<%- include("footer") -%>
+
